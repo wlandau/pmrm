@@ -184,8 +184,7 @@ Fit a progression model for repeated measures.
 }
 \section{pmrm fit objects}{
 
-A \code{"pmrm_fit"} object is a classed list returned by modeling functions
-such as \code{\link[=pmrm_model_decline]{pmrm_model_decline()}} and \code{\link[=pmrm_model_slowing]{pmrm_model_slowing()}}.
+A \code{"pmrm_fit"} object is a classed list returned by modeling functions.
 It has the following named elements:
 \itemize{
 \item \code{data}: a \code{tibble}, the input data with

@@ -5,7 +5,7 @@
 #'   (defined here as `-2 * log_likelihood`)
 #'   of a fitted progression model for repeated measures.
 #' @return Numeric scalar, the deviance.
-#' @inheritParams predict.pmrm_fit
+#' @inheritParams summary.pmrm_fit
 #' @examples
 #'   set.seed(0L)
 #'   simulation <- pmrm_simulate_decline(

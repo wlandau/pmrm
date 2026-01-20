@@ -4,7 +4,7 @@
 #' @description Extract the maximized log likelihood of a progression model
 #'   for repeated measures (PMRM).
 #' @return Numeric scalar, the maximized log likelihood of the fitted model.
-#' @inheritParams predict.pmrm_fit
+#' @inheritParams summary.pmrm_fit
 #' @examples
 #'   set.seed(0L)
 #'   simulation <- pmrm_simulate_decline(

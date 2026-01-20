@@ -2,8 +2,7 @@
 #' @keywords internal
 #' @description Fit a progression model for repeated measures.
 #' @section pmrm fit objects:
-#'  A `"pmrm_fit"` object is a classed list returned by modeling functions
-#'  such as [pmrm_model_decline()] and [pmrm_model_slowing()].
+#'  A `"pmrm_fit"` object is a classed list returned by modeling functions.
 #'  It has the following named elements:
 #'
 #'  * `data`: a `tibble`, the input data with
@@ -86,7 +85,7 @@
 #'   (see the "pmrm fit objects" section for details).
 #' @inheritParams RTMB::MakeADFun
 #' @inheritParams pmrm_data
-#' @inheritParams pmrm_simulate_decline
+#' @inheritParams pmrm_simulate
 #' @param data A data frame or `tibble` of clinical data.
 #' @param visit_times Numeric vector, the continuous scheduled time
 #'   of each study visit (since randomization).

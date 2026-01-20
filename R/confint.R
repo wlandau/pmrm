@@ -6,7 +6,7 @@
 #' @details See `vignette("models", package = "pmrm")` for details.
 #' @return The `tibble` returned by [pmrm_estimates()], except
 #'   without the columns with point estimates or standard errors.
-#' @inheritParams predict.pmrm_fit
+#' @inheritParams summary.pmrm_fit
 #' @param parm Character string, name of a family of parameters
 #'   to compute confidence intervals.
 #' @param level Numeric scalar between 0 and 1, confidence level.

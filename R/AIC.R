@@ -5,7 +5,7 @@
 #'   of a progression model for repeated measures (PMRM).
 #' @return Numeric scalar, the Akaike information criterion (AIC)
 #'   of the fitted model.
-#' @inheritParams predict.pmrm_fit
+#' @inheritParams summary.pmrm_fit
 #' @param k Not used. Must be `NULL`.
 #' @examples
 #'   set.seed(0L)

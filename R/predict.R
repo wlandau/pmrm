@@ -9,8 +9,7 @@
 #'   confidence intervals on the means.
 #'   (The confidence intervals are not actually truly prediction intervals
 #'   because they do not include variability from residuals.)
-#' @param object A fitted model object of class `"pmrm_fit"`
-#'   produced by [pmrm_model_decline()] or [pmrm_model_slowing()].
+#' @inheritParams summary.pmrm_fit
 #' @param data A `tibble` or data frame with one row per patient visit.
 #'   This is the new data for making predictions.
 #'   It must have all the same columns as the original you fit with the model,
@@ -28,7 +27,6 @@
 #'    continuous disease progression trajectory in [plot.pmrm_fit()].
 #' @param confidence Numeric between 0 and 1, the confidence level
 #'   to use in the 2-sided confidence intervals.
-#' @param ... Not used.
 #' @examples
 #'   set.seed(0L)
 #'   simulation <- pmrm_simulate_decline(

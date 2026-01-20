@@ -13,7 +13,9 @@
 #'   * `bic`: Bayesian information criterion.
 #'
 #'   This format is designed for easy comparison of multiple fitted models.
-#' @inheritParams predict.pmrm_fit
+#' @param object A fitted model object of class `"pmrm_fit"`
+#'   produced by [pmrm_model_decline()] or [pmrm_model_slowing()].
+#' @param ... Not used.
 #' @examples
 #'   set.seed(0L)
 #'   simulation <- pmrm_simulate_decline(

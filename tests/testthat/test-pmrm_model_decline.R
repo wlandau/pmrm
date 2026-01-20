@@ -1,4 +1,4 @@
-test_that("pmrm_model_decline()", {
+test_that("pmrm_model_decline_proportional()", {
   set.seed(0L)
   visit_times <- seq(from = 0, to = 4, by = 1)
   for (reml in c(TRUE, FALSE)) {
@@ -6,7 +6,7 @@ test_that("pmrm_model_decline()", {
       if (!xor(reml, with_missing)) {
         next
       }
-      simulation <- pmrm_simulate_decline(
+      simulation <- pmrm_simulate_decline_proportional(
         patients = 100,
         visit_times = visit_times,
         tau = 0,
@@ -28,7 +28,7 @@ test_that("pmrm_model_decline()", {
       if (reml) {
         supplied_visit_times <- NULL
       }
-      fit <- pmrm_model_decline(
+      fit <- pmrm_model_decline_proportional(
         data = simulation,
         outcome = "y",
         time = "t",
@@ -145,10 +145,10 @@ test_that("pmrm_model_decline()", {
   }
 })
 
-test_that("pmrm_model_decline() divergence with hessian", {
+test_that("pmrm_model_decline_proportional() divergence with hessian", {
   set.seed(0L)
   visit_times <- seq(from = 0, to = 3, by = 1)
-  simulation <- pmrm_simulate_decline(
+  simulation <- pmrm_simulate_decline_proportional(
     patients = 100,
     visit_times = visit_times,
     spline_knots = visit_times,
@@ -163,7 +163,7 @@ test_that("pmrm_model_decline() divergence with hessian", {
   for (hessian in c("divergence", "always")) {
     suppressWarnings(
       expect_warning(
-        fit <- pmrm_model_decline(
+        fit <- pmrm_model_decline_proportional(
           data = simulation,
           outcome = "y",
           time = "t",
@@ -183,14 +183,14 @@ test_that("pmrm_model_decline() divergence with hessian", {
   }
 })
 
-test_that("pmrm_model_decline() initial values", {
+test_that("pmrm_model_decline_proportional() initial values", {
   set.seed(0L)
   visit_times <- seq_len(5L) - 1
-  simulation <- pmrm_simulate_decline(
+  simulation <- pmrm_simulate_decline_proportional(
     visit_times = visit_times,
     gamma = c(1, 2)
   )
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -202,7 +202,7 @@ test_that("pmrm_model_decline() initial values", {
     initial_method = "zero"
   )
   expect_equal(fit$initial$alpha, rep(0, length(visit_times)))
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -217,7 +217,7 @@ test_that("pmrm_model_decline() initial values", {
   y <- fit$constants$y
   alpha <- stats::predict(stats::lm(y ~ t), newdata = list(t = visit_times))
   expect_equal(fit$initial$alpha, alpha)
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -234,7 +234,7 @@ test_that("pmrm_model_decline() initial values", {
   alpha <- stats::predict(stats::lm(y ~ t), newdata = list(t = visit_times))
   expect_equal(fit$initial$alpha, alpha)
   initial <- fit$final
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",

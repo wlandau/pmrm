@@ -1,7 +1,7 @@
-test_that("predict() on small data with decline", {
+test_that("predict() on small data with proportional decline model", {
   set.seed(1L)
   visit_times <- seq_len(3L) - 1L
-  simulation <- pmrm_simulate_decline(
+  simulation <- pmrm_simulate_decline_proportional(
     patients = 100,
     visit_times = visit_times,
     spline_knots = visit_times,
@@ -9,7 +9,7 @@ test_that("predict() on small data with decline", {
     alpha = rep(1, length(visit_times)),
     beta = c(0, 0.1, 0.2)
   )
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -19,7 +19,7 @@ test_that("predict() on small data with decline", {
     visit_times = visit_times,
     reml = TRUE
   )
-  new_data <- pmrm_simulate_decline(
+  new_data <- pmrm_simulate_decline_proportional(
     patients = 1L,
     visit_times = fit$constants$visit_times,
     spline_knots = fit$constants$visit_times,
@@ -69,10 +69,10 @@ test_that("predict() on small data with decline", {
   }
 })
 
-test_that("predict() on small data with slowing", {
+test_that("predict() on small data with non-proportional slowing model", {
   set.seed(0L)
-  fit <- fit_slowing()
-  new_data <- pmrm_simulate_slowing(
+  fit <- fit_slowing_nonproportional()
+  new_data <- pmrm_simulate_slowing_nonproportional(
     patients = 1L,
     visit_times = fit$constants$visit_times,
     spline_knots = fit$constants$visit_times,
@@ -121,28 +121,28 @@ test_that("predict() on small data with slowing", {
   }
 })
 
-test_that("predict() on all data (decline model)", {
+test_that("predict() on all data (proportional decline model)", {
   set.seed(0L)
   expect_no_error(
     out <- predict(
-      fit_decline(),
-      data = fit_decline()$data,
+      fit_decline_proportional(),
+      data = fit_decline_proportional()$data,
       adjust = TRUE,
       confidence = 0.95
     )
   )
-  expect_gt(cor(out$estimate, fit_decline()$data$y), 0.8)
+  expect_gt(cor(out$estimate, fit_decline_proportional()$data$y), 0.8)
 })
 
-test_that("predict() on all data (slowing model)", {
+test_that("predict() on all data (non-proportional slowing model)", {
   set.seed(0L)
   expect_no_error(
     out <- predict(
-      fit_slowing(),
-      data = fit_slowing()$data,
+      fit_slowing_nonproportional(),
+      data = fit_slowing_nonproportional()$data,
       adjust = TRUE,
       confidence = 0.95
     )
   )
-  expect_gt(cor(out$estimate, fit_slowing()$data$y), 0.8)
+  expect_gt(cor(out$estimate, fit_slowing_nonproportional()$data$y), 0.8)
 })

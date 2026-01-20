@@ -1,8 +1,8 @@
 pmrm_test <- new.env(parent = emptyenv())
 
 fit_decline_nonproportional <- function() {
-  if (!is.null(pmrm_test$fit_decline)) {
-    return(pmrm_test$fit_decline)
+  if (!is.null(pmrm_test$fit_decline_nonproportional)) {
+    return(pmrm_test$fit_decline_nonproportional)
   }
   set.seed(0L)
   visit_times <- seq_len(5L) - 1
@@ -21,13 +21,13 @@ fit_decline_nonproportional <- function() {
     covariates = ~ w_1 + w_2,
     visit_times = visit_times
   )
-  pmrm_test$fit_decline <- fit
+  pmrm_test$fit_decline_nonproportional <- fit
   fit
 }
 
 fit_decline_proportional <- function() {
-  if (!is.null(pmrm_test$fit_decline)) {
-    return(pmrm_test$fit_decline)
+  if (!is.null(pmrm_test$fit_decline_proportional)) {
+    return(pmrm_test$fit_decline_proportional)
   }
   set.seed(0L)
   visit_times <- seq_len(5L) - 1
@@ -46,13 +46,13 @@ fit_decline_proportional <- function() {
     covariates = ~ w_1 + w_2,
     visit_times = visit_times
   )
-  pmrm_test$fit_decline <- fit
+  pmrm_test$fit_decline_proportional <- fit
   fit
 }
 
 fit_slowing_nonproportional <- function() {
-  if (!is.null(pmrm_test$fit_slowing)) {
-    return(pmrm_test$fit_slowing)
+  if (!is.null(pmrm_test$fit_slowing_nonproportional)) {
+    return(pmrm_test$fit_slowing_nonproportional)
   }
   set.seed(0L)
   visit_times <- seq_len(5L) - 1
@@ -71,13 +71,13 @@ fit_slowing_nonproportional <- function() {
     covariates = ~ w_1 + w_2,
     visit_times = visit_times
   )
-  pmrm_test$fit_slowing <- fit
+  pmrm_test$fit_slowing_nonproportional <- fit
   fit
 }
 
 fit_slowing_proportional <- function() {
-  if (!is.null(pmrm_test$fit_slowing)) {
-    return(pmrm_test$fit_slowing)
+  if (!is.null(pmrm_test$fit_slowing_proportional)) {
+    return(pmrm_test$fit_slowing_proportional)
   }
   set.seed(0L)
   visit_times <- seq_len(5L) - 1
@@ -96,6 +96,6 @@ fit_slowing_proportional <- function() {
     covariates = ~ w_1 + w_2,
     visit_times = visit_times
   )
-  pmrm_test$fit_slowing <- fit
+  pmrm_test$fit_slowing_proportional <- fit
   fit
 }

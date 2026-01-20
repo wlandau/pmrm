@@ -1,10 +1,10 @@
-test_that("pmrm_simulate_slowing() without covariates", {
-  data <- pmrm_simulate_slowing(gamma = numeric(0L))
+test_that("pmrm_simulate_slowing_nonproportional() without covariates", {
+  data <- pmrm_simulate_slowing_nonproportional(gamma = numeric(0L))
   expect_true(tibble::is_tibble(data))
   expect_false(any(grepl("^w_", colnames(data))))
 })
 
-test_that("pmrm_simulate_slowing() with covariates", {
+test_that("pmrm_simulate_slowing_nonproportional() with covariates", {
   set.seed(0L)
   I <- 300L
   J <- 5L
@@ -17,7 +17,7 @@ test_that("pmrm_simulate_slowing() with covariates", {
   )
   beta <- cbind(0, rbind(0, theta))
   gamma <- c(1.2, -3.7)
-  data <- pmrm_simulate_slowing(
+  data <- pmrm_simulate_slowing_nonproportional(
     patients = I,
     visit_times = visit_times,
     spline_knots = visit_times,

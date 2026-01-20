@@ -1,6 +1,6 @@
 test_that("pmrm_compute_W() empty case", {
   set.seed(0L)
-  simulation <- pmrm_simulate_decline()
+  simulation <- pmrm_simulate_decline_proportional()
   data <- pmrm_data(
     data = simulation,
     outcome = "y",
@@ -16,7 +16,7 @@ test_that("pmrm_compute_W() empty case", {
 })
 
 test_that("pmrm_compute_W() nonempty case", {
-  simulation <- pmrm_simulate_decline(gamma = c(-1, 1))
+  simulation <- pmrm_simulate_decline_proportional(gamma = c(-1, 1))
   data <- pmrm_data(
     data = simulation,
     outcome = "y",

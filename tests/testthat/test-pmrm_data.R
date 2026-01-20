@@ -1,5 +1,5 @@
 test_that("pmrm_data()", {
-  raw <- pmrm_simulate_decline(gamma = c(1, 2))
+  raw <- pmrm_simulate_decline_proportional(gamma = c(1, 2))
   raw$y[1] <- NA_real_
   data <- pmrm_data(
     data = raw,
@@ -28,7 +28,7 @@ test_that("pmrm_data()", {
 })
 
 test_that("pmrm_data() bad covariates", {
-  raw <- pmrm_simulate_decline(gamma = c(1, 2))
+  raw <- pmrm_simulate_decline_proportional(gamma = c(1, 2))
   raw$y[1] <- NA_real_
   expect_error(
     pmrm_data(

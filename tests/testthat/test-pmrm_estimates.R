@@ -1,5 +1,5 @@
-test_that("pmrm_estimates() decline", {
-  fit <- fit_decline()
+test_that("pmrm_estimates() proportional decline", {
+  fit <- fit_decline_proportional()
   parameters <- c(
     "beta",
     "theta",
@@ -57,8 +57,8 @@ test_that("pmrm_estimates() decline", {
   }
 })
 
-test_that("pmrm_estimates() slowing", {
-  fit <- fit_slowing()
+test_that("pmrm_estimates() non-proportional slowing", {
+  fit <- fit_slowing_nonproportional()
   parameters <- c(
     "beta",
     "theta",

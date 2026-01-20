@@ -1,5 +1,5 @@
-test_that("pmrm_marginals() decline", {
-  fit <- fit_decline()
+test_that("pmrm_marginals() proportional decline", {
+  fit <- fit_decline_proportional()
   for (type in c("outcome", "change", "effect")) {
     out <- pmrm_marginals(fit, type = type)
     expect_equal(
@@ -43,8 +43,8 @@ test_that("pmrm_marginals() decline", {
   expect_equal(effect$estimate, change$estimate - control)
 })
 
-test_that("pmrm_marginals() slowing", {
-  fit <- fit_slowing()
+test_that("pmrm_marginals() non-proportional slowing", {
+  fit <- fit_slowing_nonproportional()
   for (type in c("outcome", "change", "effect")) {
     out <- pmrm_marginals(fit, type = type)
     expect_equal(

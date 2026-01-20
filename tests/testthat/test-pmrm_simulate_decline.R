@@ -1,10 +1,10 @@
-test_that("pmrm_simulate_decline() without covariates", {
-  data <- pmrm_simulate_decline(gamma = numeric(0L))
+test_that("pmrm_simulate_decline_proportional() without covariates", {
+  data <- pmrm_simulate_decline_proportional(gamma = numeric(0L))
   expect_true(tibble::is_tibble(data))
   expect_false(any(grepl("^w_", colnames(data))))
 })
 
-test_that("pmrm_simulate_decline() with covariates", {
+test_that("pmrm_simulate_decline_proportional() with covariates", {
   set.seed(0L)
   I <- 300L
   J <- 5L
@@ -13,7 +13,7 @@ test_that("pmrm_simulate_decline() with covariates", {
   alpha <- c(0.15, 0.25, 0.35, 0.45, 0.55)
   beta <- c(0, 0.1, 0.2)
   gamma <- c(1.2, -3.7)
-  data <- pmrm_simulate_decline(
+  data <- pmrm_simulate_decline_proportional(
     patients = I,
     visit_times = visit_times,
     spline_knots = visit_times,

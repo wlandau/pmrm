@@ -97,7 +97,6 @@ Other estimates and predictions:
 \code{\link{pmrm_marginals}()},
 \code{\link{predict.pmrm_fit}()},
 \code{\link{residuals.pmrm_fit}()},
-\code{\link{vcov.pmrm_fit_decline}()},
-\code{\link{vcov.pmrm_fit_slowing}()}
+\code{\link{vcov.pmrm_fit}()}
 }
 \concept{estimates and predictions}

@@ -22,8 +22,7 @@ reference:
   - predict.pmrm_fit
   - residuals.pmrm_fit
   - VarCorr.pmrm_fit
-  - vcov.pmrm_fit_decline
-  - vcov.pmrm_fit_slowing
+  - vcov.pmrm_fit
 - title: Model comparison
   contents:
   - AIC.pmrm_fit

@@ -14,8 +14,8 @@
 \value{
 A \code{tibble} with one row and columns with the following columns:
 \itemize{
-\item \code{model}: name of the model: \code{"decline"} for proportional decline,
-\code{"slowing"} for non-proportional slowing.
+\item \code{model}: \code{"decline"} or \code{"slowing"}.
+\item \code{parameterization}: \code{"proportional"} or \code{"nonproportional"}.
 \item \code{log_likelihood}: maximized log likelihood of the model fit.
 \item \code{n_observations}: number of non-missing observations in the data.
 \item \code{n_parameters}: number of true model parameters.

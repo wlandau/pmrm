@@ -4,8 +4,8 @@
 #' @description Summarize a progression model for repeated measures (PMRM).
 #' @return A `tibble` with one row and columns with the following columns:
 #'
-#'   * `model`: name of the model: `"decline"` for proportional decline,
-#'     `"slowing"` for non-proportional slowing.
+#'   * `model`: `"decline"` or `"slowing"`.
+#'   * `parameterization`: `"proportional"` or `"nonproportional"`.
 #'   * `log_likelihood`: maximized log likelihood of the model fit.
 #'   * `n_observations`: number of non-missing observations in the data.
 #'   * `n_parameters`: number of true model parameters.
@@ -33,7 +33,12 @@
 #'   summary(fit)
 summary.pmrm_fit <- function(object, ...) {
   tibble::tibble(
-    model = gsub("^pmrm_fit_", "", class(object)[1L]),
+    model = ifelse(object$constants$slowing, "slowing", "decline"),
+    parameterization = ifelse(
+      object$constants$proportional,
+      "proportional",
+      "nonproportional"
+    ),
     log_likelihood = object$metrics$log_likelihood,
     n_observations = object$metrics$n_observations,
     n_parameters = object$metrics$n_parameters,

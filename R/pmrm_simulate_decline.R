@@ -2,10 +2,7 @@
 #' @export
 #' @family simulations
 #' @description Simulate a dataset from the proportional decline model.
-#' @details Please see the vignettes for details.
-#'   The "Models" vignette explains the underlying models and notation,
-#'   and the "Simulation" vignette explains how [pmrm_simulate_decline()]
-#'   simulates datasets from the proportional decline model.
+#' @details See `vignette("models", package = "pmrm")` for details.
 #' @section Simulated data:
 #'   The datasets returned from the simulation functions
 #'   have one row per patient visit and the following columns
@@ -25,8 +22,9 @@
 #'    * `t`: observed continuous time since baseline.
 #'    * `beta`: the scalar component of the treatment effect parameter
 #'      `beta` defined for patient `i`.
-#'    * `e`: residuals.
+#'    * `mu`: expected clinical outcome at the given patient visit.
 #'    * `w_*`: columns of the covariate adjustment model matrix `W`.
+#'    * `e`: residuals.
 #' @return A `tibble` of clinical data simulated from the
 #'   proportional decline model.
 #'   See the "Simulated data" section of this help file for details.

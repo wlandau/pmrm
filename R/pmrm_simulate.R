@@ -140,7 +140,6 @@ pmrm_simulate_W <- function(patients, visit_times, gamma) {
   }
   W_elements <- stats::rnorm(patients * length(visit_times) * length(gamma))
   W <- matrix(W_elements, ncol = length(gamma))
-  W <- sweep(W, 2L, colMeans(W))
   colnames(W) <- paste0("w_", seq_len(ncol(W)))
   W
 }

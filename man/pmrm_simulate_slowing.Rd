@@ -96,8 +96,9 @@ which conform to the notation from \code{vignette("models", package = "pmrm")}:
 \item \code{t}: observed continuous time since baseline.
 \item \code{beta}: the scalar component of the treatment effect parameter
 \code{beta} defined for patient \code{i}.
-\item \code{e}: residuals.
+\item \code{mu}: expected clinical outcome at the given patient visit.
 \item \verb{w_*}: columns of the covariate adjustment model matrix \code{W}.
+\item \code{e}: residuals.
 }
 }
 

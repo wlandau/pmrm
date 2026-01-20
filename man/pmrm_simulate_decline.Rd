@@ -69,10 +69,7 @@ See the "Simulated data" section of this help file for details.
 Simulate a dataset from the proportional decline model.
 }
 \details{
-Please see the vignettes for details.
-The "Models" vignette explains the underlying models and notation,
-and the "Simulation" vignette explains how \code{\link[=pmrm_simulate_decline]{pmrm_simulate_decline()}}
-simulates datasets from the proportional decline model.
+See \code{vignette("models", package = "pmrm")} for details.
 }
 \section{Simulated data}{
 
@@ -94,8 +91,9 @@ which conform to the notation from \code{vignette("models", package = "pmrm")}:
 \item \code{t}: observed continuous time since baseline.
 \item \code{beta}: the scalar component of the treatment effect parameter
 \code{beta} defined for patient \code{i}.
-\item \code{e}: residuals.
+\item \code{mu}: expected clinical outcome at the given patient visit.
 \item \verb{w_*}: columns of the covariate adjustment model matrix \code{W}.
+\item \code{e}: residuals.
 }
 }
 

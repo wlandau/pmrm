@@ -51,17 +51,25 @@ in Medicine* 41 (28): 5537–57. <https://doi.org/10.1002/sim.9581>.
 
 ## Simulations
 
-- [`pmrm_simulate_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_simulate_decline.md)
+- [`pmrm_simulate_decline_nonproportional()`](https://wlandau.github.io/pmrm/reference/pmrm_simulate_decline_nonproportional.md)
+  : Simulate non-proportional decline model.
+- [`pmrm_simulate_decline_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_simulate_decline_proportional.md)
   : Simulate proportional decline model.
-- [`pmrm_simulate_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_simulate_slowing.md)
+- [`pmrm_simulate_slowing_nonproportional()`](https://wlandau.github.io/pmrm/reference/pmrm_simulate_slowing_nonproportional.md)
   : Simulate non-proportional slowing model.
+- [`pmrm_simulate_slowing_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_simulate_slowing_proportional.md)
+  : Simulate proportional slowing model.
 
 ## Models
 
-- [`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md)
+- [`pmrm_model_decline_nonproportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline_nonproportional.md)
+  : Fit the non-proportional decline model.
+- [`pmrm_model_decline_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline_proportional.md)
   : Fit the proportional decline model.
-- [`pmrm_model_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing.md)
+- [`pmrm_model_slowing_nonproportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing_nonproportional.md)
   : Fit the non-proportional slowing model.
+- [`pmrm_model_slowing_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing_proportional.md)
+  : Fit the proportional slowing model.
 
 ## Estimates and predictions
 

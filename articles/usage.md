@@ -12,7 +12,7 @@ functions to simulate datasets from each supported model.
 ``` r
 library(pmrm)
 set.seed(0)
-simulation <- pmrm_simulate_decline(
+simulation <- pmrm_simulate_decline_proportional(
   patients = 500,
   visit_times = c(0, 1, 2, 3, 4),
   tau = 0.25,
@@ -60,7 +60,7 @@ process runs fast.
 
 ``` r
 system.time(
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -72,7 +72,7 @@ system.time(
   )
 )
 #>    user  system elapsed 
-#>   0.457   0.017   0.474
+#>   0.438   0.001   0.439
 ```
 
 The fitted model object has parameter estimates, standard errors, model
@@ -182,14 +182,14 @@ twist in strange directions. If you notice a strange fitted spline in a
 divergent model, you may wish to experiment with different knot
 placement or hand-pick initial values for the vertical knot distances
 `alpha`. The latter can sometimes help stabilize `theta` (especially for
-[`pmrm_model_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing.md))
-by beginning with an appropriately strict monotone spline. Example:
+`pmrm_model_slowing()`) by beginning with an appropriately strict
+monotone spline. Example:
 
 ``` r
 initial <- fit$initial
 initial$alpha <- c(0, 0.5, 1, 1.5, 2)
 
-fit2 <- pmrm_model_decline(
+fit2 <- pmrm_model_decline_proportional(
   data = simulation,
   outcome = "y",
   time = "t",
@@ -209,7 +209,7 @@ the original optimization.
 initial <- fit$final # true parameters from the last fit
 initial$theta[2] <- 0 # reset a scalar parameter that may have diverged
 
-fit3 <- pmrm_model_decline(
+fit3 <- pmrm_model_decline_proportional(
   data = simulation,
   outcome = "y",
   time = "t",
@@ -290,10 +290,10 @@ high-level metrics for model comparison.
 
 ``` r
 summary(fit)
-#> # A tibble: 1 × 6
-#>   model   log_likelihood n_observations n_parameters   aic   bic
-#>   <chr>            <dbl>          <int>        <int> <dbl> <dbl>
-#> 1 decline         -3556.           2494           24 7159. 7299.
+#> # A tibble: 1 × 7
+#>   model  parameterization log_likelihood n_observations n_parameters   aic   bic
+#>   <chr>  <chr>                     <dbl>          <int>        <int> <dbl> <dbl>
+#> 1 decli… proportional             -3556.           2494           24 7159. 7299.
 ```
 
 ## Marginals
@@ -301,7 +301,7 @@ summary(fit)
 [`pmrm_marginals()`](https://wlandau.github.io/pmrm/reference/pmrm_marginals.md)
 returns estimated marginal means for each study arm and visit. The
 continuous time at each visit is given by the `marginals` argument to
-[`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md).
+[`pmrm_model_decline_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline_proportional.md).
 
 ``` r
 pmrm_marginals(fit, type = "outcome")
@@ -377,12 +377,8 @@ pmrm_marginals(fit, type = "effect")
 ## Predictions
 
 The package supports a
-[`predict()`](https://rdrr.io/r/stats/predict.html) method for models
-fit with
-[`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md)
-or
-[`pmrm_model_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing.md).
-It returns the expected values, standard errors, and confidence
+[`predict()`](https://rdrr.io/r/stats/predict.html) method for all
+PMRMs. It returns the expected values, standard errors, and confidence
 intervals for the outcomes given new data. All the important columns
 from the original data need to be part of the new data, except that the
 outcome column can be entirely absent.
@@ -446,4 +442,4 @@ plot(
 2.  See also `fit$standard_errors`.
 
 3.  Can be supplied to the `initial` argument of
-    [`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md).
+    [`pmrm_model_decline_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline_proportional.md).

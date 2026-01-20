@@ -52,8 +52,7 @@
 
 
 <dl><dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
-<dd><p>A fitted model object of class <code>"pmrm_fit"</code>
-produced by <code><a href="pmrm_model_decline.html">pmrm_model_decline()</a></code> or <code><a href="pmrm_model_slowing.html">pmrm_model_slowing()</a></code>.</p></dd>
+<dd><p>A fitted model object of class <code>"pmrm_fit"</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -62,8 +61,8 @@ produced by <code><a href="pmrm_model_decline.html">pmrm_model_decline()</a></co
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>tibble</code> with one row and columns with the following columns:</p><ul><li><p><code>model</code>: name of the model: <code>"decline"</code> for proportional decline,
-<code>"slowing"</code> for non-proportional slowing.</p></li>
+    <p>A <code>tibble</code> with one row and columns with the following columns:</p><ul><li><p><code>model</code>: <code>"decline"</code> or <code>"slowing"</code>.</p></li>
+<li><p><code>parameterization</code>: <code>"proportional"</code> or <code>"nonproportional"</code>.</p></li>
 <li><p><code>log_likelihood</code>: maximized log likelihood of the model fit.</p></li>
 <li><p><code>n_observations</code>: number of non-missing observations in the data.</p></li>
 <li><p><code>n_parameters</code>: number of true model parameters.</p></li>
@@ -84,11 +83,11 @@ produced by <code><a href="pmrm_model_decline.html">pmrm_model_decline()</a></co
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_simulate_decline.html">pmrm_simulate_decline</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_simulate_decline_proportional.html">pmrm_simulate_decline_proportional</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    visit_times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">5L</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_model_decline.html">pmrm_model_decline</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_model_decline_proportional.html">pmrm_model_decline_proportional</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    data <span class="op">=</span> <span class="va">simulation</span>,</span></span>
 <span class="r-in"><span>    outcome <span class="op">=</span> <span class="st">"y"</span>,</span></span>
 <span class="r-in"><span>    time <span class="op">=</span> <span class="st">"t"</span>,</span></span>
@@ -98,10 +97,10 @@ produced by <code><a href="pmrm_model_decline.html">pmrm_model_decline()</a></co
 <span class="r-in"><span>    covariates <span class="op">=</span> <span class="op">~</span> <span class="va">w_1</span> <span class="op">+</span> <span class="va">w_2</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   model   log_likelihood n_observations n_parameters   aic   bic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> decline         -<span style="color: #BB0000; text-decoration: underline;">2</span><span style="color: #BB0000;">114.</span>           <span style="text-decoration: underline;">1</span>500           24 <span style="text-decoration: underline;">4</span>277. <span style="text-decoration: underline;">4</span>404.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   model  parameterization log_likelihood n_observations n_parameters   aic   bic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> decli… proportional             -<span style="color: #BB0000; text-decoration: underline;">2</span><span style="color: #BB0000;">114.</span>           <span style="text-decoration: underline;">1</span>500           24 <span style="text-decoration: underline;">4</span>277. <span style="text-decoration: underline;">4</span>404.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

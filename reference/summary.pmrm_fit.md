@@ -13,10 +13,7 @@ summary(object, ...)
 
 - object:
 
-  A fitted model object of class `"pmrm_fit"` produced by
-  [`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md)
-  or
-  [`pmrm_model_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing.md).
+  A fitted model object of class `"pmrm_fit"`.
 
 - ...:
 
@@ -26,8 +23,9 @@ summary(object, ...)
 
 A `tibble` with one row and columns with the following columns:
 
-- `model`: name of the model: `"decline"` for proportional decline,
-  `"slowing"` for non-proportional slowing.
+- `model`: `"decline"` or `"slowing"`.
+
+- `parameterization`: `"proportional"` or `"nonproportional"`.
 
 - `log_likelihood`: maximized log likelihood of the model fit.
 
@@ -54,11 +52,11 @@ Other model comparison:
 
 ``` r
   set.seed(0L)
-  simulation <- pmrm_simulate_decline(
+  simulation <- pmrm_simulate_decline_proportional(
     visit_times = seq_len(5L) - 1,
     gamma = c(1, 2)
   )
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -68,8 +66,8 @@ Other model comparison:
     covariates = ~ w_1 + w_2
   )
   summary(fit)
-#> # A tibble: 1 × 6
-#>   model   log_likelihood n_observations n_parameters   aic   bic
-#>   <chr>            <dbl>          <int>        <int> <dbl> <dbl>
-#> 1 decline         -2114.           1500           24 4277. 4404.
+#> # A tibble: 1 × 7
+#>   model  parameterization log_likelihood n_observations n_parameters   aic   bic
+#>   <chr>  <chr>                     <dbl>          <int>        <int> <dbl> <dbl>
+#> 1 decli… proportional             -2114.           1500           24 4277. 4404.
 ```

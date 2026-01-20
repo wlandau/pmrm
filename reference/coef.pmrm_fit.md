@@ -14,10 +14,7 @@ coef(object, ...)
 
 - object:
 
-  A fitted model object of class `"pmrm_fit"` produced by
-  [`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md)
-  or
-  [`pmrm_model_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing.md).
+  A fitted model object of class `"pmrm_fit"`.
 
 - ...:
 
@@ -53,11 +50,11 @@ Other estimates and predictions:
 
 ``` r
   set.seed(0L)
-  simulation <- pmrm_simulate_decline(
+  simulation <- pmrm_simulate_decline_proportional(
     visit_times = seq_len(5L) - 1,
     gamma = c(1, 2)
   )
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",

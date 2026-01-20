@@ -14,10 +14,7 @@ predict(object, data = object$data, adjust = TRUE, confidence = 0.95, ...)
 
 - object:
 
-  A fitted model object of class `"pmrm_fit"` produced by
-  [`pmrm_model_decline()`](https://wlandau.github.io/pmrm/reference/pmrm_model_decline.md)
-  or
-  [`pmrm_model_slowing()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing.md).
+  A fitted model object of class `"pmrm_fit"`.
 
 - data:
 
@@ -73,11 +70,11 @@ Other estimates and predictions:
 
 ``` r
   set.seed(0L)
-  simulation <- pmrm_simulate_decline(
+  simulation <- pmrm_simulate_decline_proportional(
     visit_times = seq_len(5L) - 1,
     gamma = c(1, 2)
   )
-  fit <- pmrm_model_decline(
+  fit <- pmrm_model_decline_proportional(
     data = simulation,
     outcome = "y",
     time = "t",
@@ -86,7 +83,7 @@ Other estimates and predictions:
     arm = "arm",
     covariates = ~ w_1 + w_2
   )
-  new_data <- pmrm_simulate_decline(
+  new_data <- pmrm_simulate_decline_proportional(
     patients = 1,
     visit_times = seq_len(5L) - 1,
     gamma = c(1, 2)

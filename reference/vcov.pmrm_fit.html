@@ -55,8 +55,7 @@ parameters of a progression model for repeated measures.</p>
 
 
 <dl><dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
-<dd><p>A fitted model object of class <code>"pmrm_fit"</code>
-produced by <code><a href="pmrm_model_decline.html">pmrm_model_decline()</a></code> or <code><a href="pmrm_model_slowing.html">pmrm_model_slowing()</a></code>.</p></dd>
+<dd><p>A fitted model object of class <code>"pmrm_fit"</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -85,11 +84,11 @@ arm and visit for non-proportional models.)</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_simulate_slowing.html">pmrm_simulate_slowing</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">simulation</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_simulate_decline_proportional.html">pmrm_simulate_decline_proportional</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    visit_times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">5L</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    gamma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_model_slowing.html">pmrm_model_slowing</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmrm_model_decline_proportional.html">pmrm_model_decline_proportional</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    data <span class="op">=</span> <span class="va">simulation</span>,</span></span>
 <span class="r-in"><span>    outcome <span class="op">=</span> <span class="st">"y"</span>,</span></span>
 <span class="r-in"><span>    time <span class="op">=</span> <span class="st">"t"</span>,</span></span>
@@ -99,24 +98,9 @@ arm and visit for non-proportional models.)</p>
 <span class="r-in"><span>    covariates <span class="op">=</span> <span class="op">~</span> <span class="va">w_1</span> <span class="op">+</span> <span class="va">w_2</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               arm_2:visit_2 arm_2:visit_3 arm_2:visit_4 arm_2:visit_5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_2  2.162988e-02  -0.006151467  -0.002401060  6.481015e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_3 -6.151467e-03   0.024403604   0.003697296  2.563572e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_4 -2.401060e-03   0.003697296   0.005533995  1.801208e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_5  6.481015e-05   0.002563572   0.001801208  4.369328e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_2  7.790731e-03  -0.003979014  -0.001533088 -1.947778e-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_3 -2.769498e-02   0.026906926   0.009822227  2.856689e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_4 -2.109110e-03   0.004426184   0.002338528  1.681363e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_5 -2.531156e-04   0.001439367   0.001720711  2.056731e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               arm_3:visit_2 arm_3:visit_3 arm_3:visit_4 arm_3:visit_5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_2  0.0077907308  -0.027694984  -0.002109110 -0.0002531156</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_3 -0.0039790145   0.026906926   0.004426184  0.0014393666</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_4 -0.0015330881   0.009822227   0.002338528  0.0017207111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2:visit_5 -0.0001947778   0.002856689   0.001681363  0.0020567315</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_2  0.0182266869  -0.022780315  -0.002189579  0.0001137410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_3 -0.0227803155   0.632872290   0.010976935  0.0024803578</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_4 -0.0021895787   0.010976935   0.005771546  0.0016207117</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3:visit_5  0.0001137410   0.002480358   0.001620712  0.0043726367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             arm_2       arm_3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arm_2 0.002912489 0.001176870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arm_3 0.001176870 0.002767405</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

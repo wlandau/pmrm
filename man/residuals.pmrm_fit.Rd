@@ -57,8 +57,7 @@ of a fitted progression model for repeated measures.
 \seealso{
 Other estimates and predictions: 
 \code{\link{VarCorr.pmrm_fit}()},
-\code{\link{coef.pmrm_fit_decline}()},
-\code{\link{coef.pmrm_fit_slowing}()},
+\code{\link{coef.pmrm_fit}()},
 \code{\link{fitted.pmrm_fit}()},
 \code{\link{plot.pmrm_fit}()},
 \code{\link{pmrm_estimates}()},

@@ -13,8 +13,7 @@ reference:
   - pmrm_model_slowing
 - title: Estimates and predictions 
   contents:
-  - coef.pmrm_fit_decline
-  - coef.pmrm_fit_slowing
+  - coef.pmrm_fit
   - confint.pmrm_fit
   - fitted.pmrm_fit
   - plot.pmrm_fit

@@ -28,11 +28,11 @@
 #'   to use in 2-sided normal confidence intervals.
 #' @examples
 #'   set.seed(0L)
-#'   simulation <- pmrm_simulate_decline_proportional(
+#'   simulation <- pmrm_simulate_decline_nonproportional(
 #'     visit_times = seq_len(5L) - 1,
 #'     gamma = c(1, 2)
 #'   )
-#'   fit <- pmrm_model_decline_proportional(
+#'   fit <- pmrm_model_decline_nonproportional(
 #'     data = simulation,
 #'     outcome = "y",
 #'     time = "t",
@@ -91,65 +91,50 @@ pmrm_estimates <- function(
 }
 
 summarize_theta <- function(fit) {
-  UseMethod("summarize_theta")
-}
-
-#' @export
-summarize_theta.pmrm_fit_decline <- function(fit) {
-  arm <- fit$data[[pmrm_data_labels(fit$data)$arm]]
-  tibble::tibble(
-    arm = factor(levels(arm), ordered = TRUE, levels = levels(arm))[-1L],
-    estimate = as.numeric(fit$estimates$theta),
-    standard_error = as.numeric(fit$standard_errors$theta)
-  )
-}
-
-#' @export
-summarize_theta.pmrm_fit_slowing <- function(fit) {
   labels <- pmrm_data_labels(fit$data)
   arm <- fit$data[[labels$arm]]
   visit <- fit$data[[labels$visit]]
   arms <- factor(levels(arm), ordered = TRUE, levels = levels(arm))[-1L]
   visits <- factor(levels(visit), ordered = TRUE, levels = levels(visit))[-1L]
-  tibble::tibble(
-    arm = rep(arms, each = length(levels(visits)) - 1L),
-    visit = rep(visits, times = length(levels(arms)) - 1L),
-    estimate = as.numeric(t(fit$estimates$theta)),
-    standard_error = as.numeric(t(fit$standard_errors$theta))
-  )
+  if (fit$constants$proportional) {
+    tibble::tibble(
+      arm = arms,
+      estimate = as.numeric(fit$estimates$theta),
+      standard_error = as.numeric(fit$standard_errors$theta)
+    )
+  } else {
+    tibble::tibble(
+      arm = rep(arms, each = length(levels(visits)) - 1L),
+      visit = rep(visits, times = length(levels(arms)) - 1L),
+      estimate = as.numeric(t(fit$estimates$theta)),
+      standard_error = as.numeric(t(fit$standard_errors$theta))
+    )
+  }
 }
 
 summarize_beta <- function(fit) {
-  UseMethod("summarize_beta")
-}
-
-#' @export
-summarize_beta.pmrm_fit_decline <- function(fit) {
-  arm <- fit$data[[pmrm_data_labels(fit$data)$arm]]
-  out <- tibble::tibble(
-    arm = factor(levels(arm), ordered = TRUE, levels = levels(arm)),
-    estimate = as.numeric(fit$estimates$beta),
-    standard_error = as.numeric(fit$standard_errors$beta)
-  )
-  out$standard_error[out$arm == min(out$arm)] <- NA_real_
-  out
-}
-
-#' @export
-summarize_beta.pmrm_fit_slowing <- function(fit) {
   labels <- pmrm_data_labels(fit$data)
   arm <- fit$data[[labels$arm]]
   visit <- fit$data[[labels$visit]]
   arms <- factor(levels(arm), ordered = TRUE, levels = levels(arm))
   visits <- factor(levels(visit), ordered = TRUE, levels = levels(visit))
-  out <- tibble::tibble(
-    arm = rep(arms, each = length(levels(visits))),
-    visit = rep(visits, times = length(levels(arms))),
-    estimate = as.numeric(t(fit$estimates$beta)),
-    standard_error = as.numeric(t(fit$standard_errors$beta))
-  )
-  index <- out$arm == min(out$arm) | out$visit == min(out$visit)
-  out$standard_error[index] <- NA_real_
+  if (fit$constants$proportional) {
+    out <- tibble::tibble(
+      arm = factor(levels(arm), ordered = TRUE, levels = levels(arm)),
+      estimate = as.numeric(fit$estimates$beta),
+      standard_error = as.numeric(fit$standard_errors$beta)
+    )
+    which_missing <- out$arm == min(out$arm)
+  } else {
+    out <- tibble::tibble(
+      arm = rep(arms, each = length(levels(visits))),
+      visit = rep(visits, times = length(levels(arms))),
+      estimate = as.numeric(t(fit$estimates$beta)),
+      standard_error = as.numeric(t(fit$standard_errors$beta))
+    )
+    which_missing <- out$arm == min(out$arm) | out$visit == min(out$visit)
+  }
+  out$standard_error[which_missing] <- NA_real_
   out
 }
 

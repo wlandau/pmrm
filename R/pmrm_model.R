@@ -358,7 +358,7 @@ pmrm_model <- function(
     metrics = metrics,
     spline = spline
   )
-  structure(fit, class = c(pmrm_class(slowing, proportional), "pmrm_fit"))
+  structure(fit, class = "pmrm_fit")
 }
 
 pmrm_model_diverged <- function(model, optimization, reml, saddle) {
@@ -382,8 +382,4 @@ pmrm_model_metrics <- function(data, initial, optimization) {
     aic = aic,
     bic = bic
   )
-}
-
-pmrm_class <- function(slowing, proportional) {
-  paste0("pmrm_fit_", if_any(slowing, "slowing", "decline"))
 }

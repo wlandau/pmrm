@@ -81,52 +81,48 @@ test_that("pmrm_model_slowing_nonproportional()", {
         )
       )
       expect_equal(fit$final, fit$estimates[names(fit$initial)])
-      # TODO: check parameters in every case when convergence improves.
-      # Likely this will be when starting values improve.
-      if (!reml && !with_missing) {
-        for (field in c("estimates", "standard_errors")) {
-          expect_equal(sort(names(fit[[field]])), parameters)
-          expect_equal(
-            dim(fit[[field]]$theta),
-            c(fit$constants$K - 1L, fit$constants$J - 1L)
-          )
-          expect_equal(length(fit[[field]]$gamma), ncol(fit$constants$W))
-          expect_equal(length(fit[[field]]$sigma), length(visit_times))
-          for (parameter in c("alpha", "gamma", "theta", "sigma", "rho")) {
-            expect_true(is.numeric(fit[[field]][[parameter]]))
-          }
-          for (parameter in c("Lambda", "Sigma")) {
-            expect_true(is.matrix(fit[[field]][[parameter]]))
-          }
-          expect_equal(
-            fit[[field]]$beta,
-            cbind(0, rbind(0, 1 - activation(fit[[field]]$theta)))
-          )
-          if (fit$optimization$convergence != 0L) {
-            next
-          }
-          for (parameter in c("alpha", "gamma", "theta", "sigma", "rho")) {
-            expect_false(anyNA(fit[[field]][[parameter]]))
-            expect_true(all(is.finite(fit[[field]][[parameter]])))
-          }
-          for (parameter in c("Lambda", "Sigma")) {
-            expect_equal(
-              dim(fit[[field]][[parameter]]),
-              c(length(visit_times), length(visit_times))
-            )
-            expect_true(all(is.finite(fit[[field]][[parameter]])))
-          }
+      for (field in c("estimates", "standard_errors")) {
+        expect_equal(sort(names(fit[[field]])), parameters)
+        expect_equal(
+          dim(fit[[field]]$theta),
+          c(fit$constants$K - 1L, fit$constants$J - 1L)
+        )
+        expect_equal(length(fit[[field]]$gamma), ncol(fit$constants$W))
+        expect_equal(length(fit[[field]]$sigma), length(visit_times))
+        for (parameter in c("alpha", "gamma", "theta", "sigma", "rho")) {
+          expect_true(is.numeric(fit[[field]][[parameter]]))
         }
-        if (fit$optimization$convergence == 0L) {
-          for (parameter in setdiff(parameters, c("beta", "Lambda"))) {
-            expect_true(is.numeric(fit[[field]][[parameter]]))
-            expect_false(anyNA(fit$standard_errors[[parameter]]))
-            expect_true(all(is.finite(fit$standard_errors[[parameter]])))
-            expect_true(all(fit$standard_errors[[parameter]] > 0))
-          }
-          expect_true(all(fit$estimates$sigma > sqrt(.Machine$double.eps)))
-          expect_true(all(fit$standard_errors$Lambda >= 0))
+        for (parameter in c("Lambda", "Sigma")) {
+          expect_true(is.matrix(fit[[field]][[parameter]]))
         }
+        expect_equal(
+          fit[[field]]$beta,
+          cbind(0, rbind(0, fit[[field]]$theta))
+        )
+        if (fit$optimization$convergence != 0L) {
+          next
+        }
+        for (parameter in c("alpha", "gamma", "theta", "sigma", "rho")) {
+          expect_false(anyNA(fit[[field]][[parameter]]))
+          expect_true(all(is.finite(fit[[field]][[parameter]])))
+        }
+        for (parameter in c("Lambda", "Sigma")) {
+          expect_equal(
+            dim(fit[[field]][[parameter]]),
+            c(length(visit_times), length(visit_times))
+          )
+          expect_true(all(is.finite(fit[[field]][[parameter]])))
+        }
+      }
+      if (fit$optimization$convergence == 0L) {
+        for (parameter in setdiff(parameters, c("beta", "Lambda"))) {
+          expect_true(is.numeric(fit[[field]][[parameter]]))
+          expect_false(anyNA(fit$standard_errors[[parameter]]))
+          expect_true(all(is.finite(fit$standard_errors[[parameter]])))
+          expect_true(all(fit$standard_errors[[parameter]] > 0))
+        }
+        expect_true(all(fit$estimates$sigma > sqrt(.Machine$double.eps)))
+        expect_true(all(fit$standard_errors$Lambda >= 0))
       }
       expect_true(is.list(fit$metrics))
       expect_equal(

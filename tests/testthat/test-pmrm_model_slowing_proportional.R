@@ -1,0 +1,128 @@
+test_that("pmrm_model_slowing_proportional()", {
+  set.seed(0L)
+  visit_times <- seq(from = 0, to = 4, by = 1)
+  simulation <- pmrm_simulate_slowing_proportional(
+    patients = 500,
+    visit_times = visit_times,
+    spline_knots = visit_times,
+    tau = 0,
+    gamma = c(-1, 1)
+  )
+  fit <- pmrm_model_slowing_proportional(
+    data = simulation,
+    outcome = "y",
+    time = "t",
+    patient = "patient",
+    visit = "visit",
+    arm = "arm",
+    covariates = ~ w_1 + w_2,
+    visit_times = visit_times
+  )
+  expect_true(is.list(fit))
+  expect_s3_class(fit, c("pmrm_fit_slowing", "pmrm_fit"))
+  expect_equal(
+    sort(names(fit)),
+    sort(
+      c(
+        "data",
+        "constants",
+        "objective",
+        "model",
+        "optimization",
+        "report",
+        "initial",
+        "final",
+        "estimates",
+        "standard_errors",
+        "options",
+        "metrics",
+        "spline"
+      )
+    )
+  )
+  expect_equal(
+    fit$data,
+    pmrm_data(
+      data = simulation,
+      outcome = "y",
+      time = "t",
+      patient = "patient",
+      visit = "visit",
+      arm = "arm",
+      covariates = ~ w_1 + w_2
+    )
+  )
+  expect_true(is.list(fit$constants))
+  parameters <- sort(
+    c(
+      "alpha",
+      "beta",
+      "gamma",
+      "theta",
+      "sigma",
+      "phi",
+      "rho",
+      "Lambda",
+      "Sigma"
+    )
+  )
+  expect_equal(fit$final, fit$estimates[names(fit$initial)])
+  for (field in c("estimates", "standard_errors")) {
+    expect_equal(sort(names(fit[[field]])), parameters)
+    expect_equal(length(fit[[field]]$theta), c(fit$constants$K - 1L))
+    expect_equal(length(fit[[field]]$gamma), ncol(fit$constants$W))
+    expect_equal(length(fit[[field]]$sigma), length(visit_times))
+    for (parameter in c("alpha", "gamma", "theta", "sigma", "rho")) {
+      expect_true(is.numeric(fit[[field]][[parameter]]))
+    }
+    for (parameter in c("Lambda", "Sigma")) {
+      expect_true(is.matrix(fit[[field]][[parameter]]))
+    }
+    expect_equal(fit[[field]]$beta, c(0, fit[[field]]$theta))
+    if (fit$optimization$convergence != 0L) {
+      next
+    }
+    for (parameter in c("alpha", "gamma", "theta", "sigma", "rho")) {
+      expect_false(anyNA(fit[[field]][[parameter]]))
+      expect_true(all(is.finite(fit[[field]][[parameter]])))
+    }
+    for (parameter in c("Lambda", "Sigma")) {
+      expect_equal(
+        dim(fit[[field]][[parameter]]),
+        c(length(visit_times), length(visit_times))
+      )
+      expect_true(all(is.finite(fit[[field]][[parameter]])))
+    }
+  }
+  if (fit$optimization$convergence == 0L) {
+    for (parameter in setdiff(parameters, c("beta", "Lambda"))) {
+      expect_true(is.numeric(fit[[field]][[parameter]]))
+      expect_false(anyNA(fit$standard_errors[[parameter]]))
+      expect_true(all(is.finite(fit$standard_errors[[parameter]])))
+      expect_true(all(fit$standard_errors[[parameter]] > 0))
+    }
+    expect_true(all(fit$estimates$sigma > sqrt(.Machine$double.eps)))
+    expect_true(all(fit$standard_errors$Lambda >= 0))
+  }
+  expect_true(is.list(fit$metrics))
+  expect_equal(
+    sort(names(fit$metrics)),
+    sort(
+      c(
+        "n_observations",
+        "n_parameters",
+        "log_likelihood",
+        "aic",
+        "bic"
+      )
+    )
+  )
+  n <- fit$metrics$n_observations
+  k <- fit$metrics$n_parameters
+  l <- fit$metrics$log_likelihood
+  expect_equal(n, sum(!is.na(simulation$y)))
+  expect_equal(k, sum(lengths(fit$initial)))
+  expect_equal(l, -fit$optimization$objective)
+  expect_equal(fit$metrics$aic, 2 * k - 2 * l)
+  expect_equal(fit$metrics$bic, k * log(n) - 2 * l)
+})

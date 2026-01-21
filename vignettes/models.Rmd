@@ -40,7 +40,7 @@ Let $y_i = (y_{i1}, \ldots, y_{iJ})$ be the vector of outcomes of patient $i$.
 For each pair of different patients $i$ and $i^*$, we assume $y_i$ is independent of $y_{i^*}$ and $\text{Var}(y_i) = \text{Var}(y_{i^*})$ .
 For each $i$, define $\mu_i = E(y_i) = (\mu_{i1}, \ldots, \mu_{iJ})$ and $\Sigma = \text{Var}(y_i)$.
 
-If there were no missing outcomes, we would assign a multivariate normal likelihood to each patient:
+We assign a multivariate normal likelihood to each whole patient:
 
 $$
 \begin{aligned}
@@ -48,10 +48,10 @@ y_i \sim \text{MVN}(\mu_i, \Sigma)
 \end{aligned}
 $$
 
-But to account for intercurrent events such as dropout, we instead assign patient-level marginal likelihoods with missing outcomes integrated out.
-
-Let $Q_i$ be the $q \times I$ matrix such that $Q_i y_i$ is the chronologically ordered vector of all $q$ non-missing values of $y_i$.
-Then the marginal likelihood for patient $i$ is:
+To account for intercurrent events such as dropout, we integrate out missing outcomes.
+This gives us marginal likelihoods for patients whose outcomes are partially missing.
+To construct the marginal likelihood for patient $i$, let $Q_i$ be the $q \times I$ matrix such that $Q_i y_i$ is the chronologically ordered vector of all $q$ non-missing values of $y_i$.
+The marginal likelihood of the observed values $Q_i y_i$ is just a multivariate normal on a subset of $\mu_i$ and $\Sigma$:
 
 $$
 \begin{aligned}

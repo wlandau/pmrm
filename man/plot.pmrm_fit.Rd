@@ -89,11 +89,7 @@ and shaded regions, respectively
   plot(fit)
 }
 \seealso{
-Other estimates: 
-\code{\link{VarCorr.pmrm_fit}()},
-\code{\link{coef.pmrm_fit}()},
-\code{\link{pmrm_marginals}()},
-\code{\link{tidy.pmrm_fit}()},
-\code{\link{vcov.pmrm_fit}()}
+Other visualization: 
+\code{\link{print.pmrm_fit}()}
 }
-\concept{estimates}
+\concept{visualization}

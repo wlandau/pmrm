@@ -1,6 +1,6 @@
 #' @title Plot a fitted PMRM.
 #' @export
-#' @family estimates
+#' @family visualization
 #' @description Plot a fitted progression model for repeated measures (PMRM)
 #'   against the data.
 #' @details The plot shows the following elements:

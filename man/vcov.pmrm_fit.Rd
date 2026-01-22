@@ -41,7 +41,6 @@ parameters of a progression model for repeated measures.
 Other estimates: 
 \code{\link{VarCorr.pmrm_fit}()},
 \code{\link{coef.pmrm_fit}()},
-\code{\link{plot.pmrm_fit}()},
 \code{\link{pmrm_marginals}()},
 \code{\link{tidy.pmrm_fit}()}
 }

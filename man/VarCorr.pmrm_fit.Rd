@@ -41,7 +41,6 @@ within patients.
 \seealso{
 Other estimates: 
 \code{\link{coef.pmrm_fit}()},
-\code{\link{plot.pmrm_fit}()},
 \code{\link{pmrm_marginals}()},
 \code{\link{tidy.pmrm_fit}()},
 \code{\link{vcov.pmrm_fit}()}

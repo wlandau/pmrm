@@ -68,6 +68,10 @@ system.time(
 )
 ```
 
+```{r}
+print(fit)
+```
+
 The fitted model object has parameter estimates, standard errors, model constants, the convergence status, raw [`RTMB`](https://github.com/kaskr/RTMB) objects, and other information.
 
 ```{r}

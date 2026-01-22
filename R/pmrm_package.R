@@ -11,6 +11,7 @@
 #' @importFrom RTMB dgmrf MakeADFun matrix
 #' @importFrom tibble as_tibble is_tibble new_tibble
 #' @importFrom tidyselect everything
+#' @importFrom utils capture.output
 #' @importFrom vctrs vec_cbind
 NULL
 

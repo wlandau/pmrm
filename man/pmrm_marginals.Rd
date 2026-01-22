@@ -56,7 +56,6 @@ baseline, and marginal estimates of treatment effects.
 Other estimates: 
 \code{\link{VarCorr.pmrm_fit}()},
 \code{\link{coef.pmrm_fit}()},
-\code{\link{plot.pmrm_fit}()},
 \code{\link{tidy.pmrm_fit}()},
 \code{\link{vcov.pmrm_fit}()}
 }

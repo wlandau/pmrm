@@ -41,6 +41,7 @@ Other model comparison:
 \code{\link{BIC.pmrm_fit}()},
 \code{\link{confint.pmrm_fit}()},
 \code{\link{deviance.pmrm_fit}()},
+\code{\link{glance.pmrm_fit}()},
 \code{\link{summary.pmrm_fit}()}
 }
 \concept{model comparison}

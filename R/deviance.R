@@ -23,7 +23,7 @@
 #'   )
 #'   deviance(fit)
 deviance.pmrm_fit <- function(object, ...) {
-  -2 * object$metrics$log_likelihood
+  object$metrics$deviance
 }
 
 #' @export

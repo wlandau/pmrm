@@ -51,6 +51,7 @@ Other model comparison:
 \code{\link{AIC.pmrm_fit}()},
 \code{\link{BIC.pmrm_fit}()},
 \code{\link{deviance.pmrm_fit}()},
+\code{\link{glance.pmrm_fit}()},
 \code{\link{logLik.pmrm_fit}()},
 \code{\link{summary.pmrm_fit}()}
 }

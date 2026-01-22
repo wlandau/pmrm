@@ -240,6 +240,8 @@ but excludes downstream functions
 of parameters such as \code{beta}.
 \item \code{log_likelihood}: numeric scalar,
 the maximized log likelihood of the fitted model.
+\item \code{deviance}: deviance of the fitted model,
+defined here as \code{-2 * log_likelihood}.
 \item \code{aic}: numeric scalar, the Akaike information
 criterion of the fitted model.
 \item \code{bic}: numeric scalar, the Bayesian information

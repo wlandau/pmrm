@@ -1,7 +1,8 @@
-#' @title Summarize a PMRM.
+#' @title Glance at a PMRM.
 #' @export
 #' @family model comparison
-#' @description Summarize a progression model for repeated measures (PMRM).
+#' @description Return a one-row `tibble` of model comparison metrics
+#'   for a fitted PMRM.
 #' @return A `tibble` with one row and columns with the following columns:
 #'
 #'   * `model`: `"decline"` or `"slowing"`.
@@ -15,7 +16,7 @@
 #'   * `bic`: Bayesian information criterion.
 #'
 #'   This format is designed for easy comparison of multiple fitted models.
-#' @param object A fitted model object of class `"pmrm_fit"`.
+#' @param x A fitted model x of class `"pmrm_fit"`.
 #' @param ... Not used.
 #' @examples
 #'   set.seed(0L)
@@ -32,7 +33,23 @@
 #'     arm = "arm",
 #'     covariates = ~ w_1 + w_2
 #'   )
-#'   summary(fit)
-summary.pmrm_fit <- function(object, ...) {
-  glance(x = object, ...)
+#'   glance(fit)
+glance.pmrm_fit <- function(x, ...) {
+  tibble::tibble(
+    model = ifelse(x$constants$slowing, "slowing", "decline"),
+    parameterization = ifelse(
+      x$constants$proportional,
+      "proportional",
+      "nonproportional"
+    ),
+    n_observations = x$metrics$n_observations,
+    n_parameters = x$metrics$n_parameters,
+    log_likelihood = x$metrics$log_likelihood,
+    deviance = x$metrics$deviance,
+    aic = x$metrics$aic,
+    bic = x$metrics$bic
+  )
 }
+
+#' @export
+generics::glance

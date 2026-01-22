@@ -64,6 +64,8 @@
 #'       of parameters such as `beta`.
 #'    * `log_likelihood`: numeric scalar,
 #'      the maximized log likelihood of the fitted model.
+#'    * `deviance`: deviance of the fitted model,
+#'      defined here as `-2 * log_likelihood`.
 #'    * `aic`: numeric scalar, the Akaike information
 #'      criterion of the fitted model.
 #'    * `bic`: numeric scalar, the Bayesian information
@@ -373,12 +375,14 @@ pmrm_model_metrics <- function(data, initial, optimization) {
   n <- nrow(data)
   k <- sum(lengths(initial))
   log_likelihood <- -optimization$objective
+  deviance <- -2 * log_likelihood
   aic <- 2 * k - 2 * log_likelihood
   bic <- k * log(n) - 2 * log_likelihood
   list(
     n_observations = n,
     n_parameters = k,
     log_likelihood = log_likelihood,
+    deviance = deviance,
     aic = aic,
     bic = bic
   )

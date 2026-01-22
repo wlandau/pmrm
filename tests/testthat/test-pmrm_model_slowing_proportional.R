@@ -112,6 +112,7 @@ test_that("pmrm_model_slowing_proportional()", {
         "n_observations",
         "n_parameters",
         "log_likelihood",
+        "deviance",
         "aic",
         "bic"
       )
@@ -123,6 +124,7 @@ test_that("pmrm_model_slowing_proportional()", {
   expect_equal(n, sum(!is.na(simulation$y)))
   expect_equal(k, sum(lengths(fit$initial)))
   expect_equal(l, -fit$optimization$objective)
+  expect_equal(fit$metrics$deviance, -2 * l)
   expect_equal(fit$metrics$aic, 2 * k - 2 * l)
   expect_equal(fit$metrics$bic, k * log(n) - 2 * l)
 })

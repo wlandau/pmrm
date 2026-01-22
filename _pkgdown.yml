@@ -15,24 +15,27 @@ reference:
   - pmrm_model_decline_proportional
   - pmrm_model_slowing_nonproportional
   - pmrm_model_slowing_proportional
-- title: Estimates and predictions 
+- title: Estimates
   contents:
   - coef.pmrm_fit
   - confint.pmrm_fit
-  - fitted.pmrm_fit
   - plot.pmrm_fit
   - pmrm_estimates
   - pmrm_marginals
-  - predict.pmrm_fit
-  - residuals.pmrm_fit
   - tidy.pmrm_fit
   - VarCorr.pmrm_fit
   - vcov.pmrm_fit
+- title: Predictions
+  contents:
+  - fitted.pmrm_fit
+  - predict.pmrm_fit
+  - residuals.pmrm_fit
 - title: Model comparison
   contents:
   - AIC.pmrm_fit
   - BIC.pmrm_fit
   - deviance.pmrm_fit
+  - glance.pmrm_fit
   - logLik.pmrm_fit
   - summary.pmrm_fit
 

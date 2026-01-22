@@ -11,7 +11,7 @@ Description: A progression model for repeated measures (PMRM)
 Version: 0.0.1
 License: MIT + file LICENSE
 URL: https://github.com/wlandau/pmrm,
-  https://github.com/wlandau/pmrm
+  https://wlandau.github.io/pmrm
 BugReports: https://github.com/wlandau/pmrm/issues
 Authors@R: c(
   person(

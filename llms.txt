@@ -99,6 +99,9 @@ in Medicine* 41 (28): 5537–57. <https://doi.org/10.1002/sim.9581>.
 
   `pmrm` residuals.
 
+- [`tidy(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/tidy.pmrm_fit.md)
+  : Tidy a fitted PMRM.
+
 - [`VarCorr(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/VarCorr.pmrm_fit.md)
   : Estimated covariance matrix
 

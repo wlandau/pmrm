@@ -50,6 +50,9 @@
 
   `pmrm` residuals.
 
+- [`tidy(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/tidy.pmrm_fit.md)
+  : Tidy a fitted PMRM.
+
 - [`VarCorr(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/VarCorr.pmrm_fit.md)
   : Estimated covariance matrix
 

@@ -7,38 +7,34 @@ in `parm`.
 
 ``` r
 # S3 method for class 'pmrm_fit'
-confint(
-  object,
-  parm = c("theta", "beta", "alpha", "gamma", "sigma", "phi", "rho", "Sigma", "Lambda"),
-  level = 0.95,
-  ...
-)
+confint(object, parm = NULL, level = 0.95, ...)
 ```
 
 ## Arguments
 
 - object:
 
-  A fitted model object of class `"pmrm_fit"`.
+  a fitted model object.
 
 - parm:
 
-  Character string, name of a family of parameters to compute confidence
-  intervals.
+  a specification of which parameters are to be given confidence
+  intervals, either a vector of numbers or a vector of names. If
+  missing, all parameters are considered.
 
 - level:
 
-  Numeric scalar between 0 and 1, confidence level.
+  the confidence level required.
 
 - ...:
 
-  Not used.
+  additional argument(s) for methods.
 
 ## Value
 
-The `tibble` returned by
-[`pmrm_estimates()`](https://wlandau.github.io/pmrm/reference/pmrm_estimates.md),
-except without the columns with point estimates or standard errors.
+A numeric matrix with one row for each treatment effect parameter
+(`theta`) and named columns with the lower and upper bounds of 2-sided
+confidence intervals on the parameters.
 
 ## Details
 
@@ -73,9 +69,7 @@ Other model comparison:
     covariates = ~ w_1 + w_2
   )
   confint(fit)
-#> # A tibble: 2 × 4
-#>   parameter arm    lower upper
-#>   <chr>     <ord>  <dbl> <dbl>
-#> 1 theta     arm_2 0.0492 0.261
-#> 2 theta     arm_3 0.119  0.325
+#>           2.5 %    97.5 %
+#> arm_2 0.0491933 0.2607419
+#> arm_3 0.1190821 0.3252943
 ```

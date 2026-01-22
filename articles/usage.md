@@ -72,7 +72,7 @@ system.time(
   )
 )
 #>    user  system elapsed 
-#>   0.458   0.005   0.463
+#>   0.448   0.013   0.459
 ```
 
 The fitted model object has parameter estimates, standard errors, model

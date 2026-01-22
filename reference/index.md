@@ -22,14 +22,19 @@
 - [`pmrm_model_slowing_proportional()`](https://wlandau.github.io/pmrm/reference/pmrm_model_slowing_proportional.md)
   : Fit the proportional slowing model.
 
+## Visualization
+
+- [`plot(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/plot.pmrm_fit.md)
+  : Plot a fitted PMRM.
+- [`print(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/print.pmrm_fit.md)
+  : Print a fitted PMRM.
+
 ## Estimates
 
 - [`coef(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/coef.pmrm_fit.md)
   : Treatment effect parameters
 - [`confint(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/confint.pmrm_fit.md)
   : Confidence intervals of parameters
-- [`plot(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/plot.pmrm_fit.md)
-  : Plot a fitted PMRM.
 - [`pmrm_estimates()`](https://wlandau.github.io/pmrm/reference/pmrm_estimates.md)
   : Parameter estimates and confidence intervals
 - [`pmrm_marginals()`](https://wlandau.github.io/pmrm/reference/pmrm_marginals.md)
@@ -54,7 +59,7 @@
 
   `pmrm` residuals.
 
-## Model comparison
+## Comparison
 
 - [`AIC(`*`<pmrm_fit>`*`)`](https://wlandau.github.io/pmrm/reference/AIC.pmrm_fit.md)
   : Akaike information criterion (AIC)

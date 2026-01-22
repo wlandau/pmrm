@@ -31,7 +31,6 @@ visit for non-proportional models.)
 Other estimates:
 [`VarCorr.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/VarCorr.pmrm_fit.md),
 [`coef.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/coef.pmrm_fit.md),
-[`plot.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/plot.pmrm_fit.md),
 [`pmrm_marginals()`](https://wlandau.github.io/pmrm/reference/pmrm_marginals.md),
 [`tidy.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/tidy.pmrm_fit.md)
 

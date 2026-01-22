@@ -134,18 +134,40 @@ the model fitting process runs fast.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.436   0.008   0.446</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.434   0.010   0.445</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Model:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   PMRM type:        decline</span></span>
+<span><span class="co">#&gt;   Parameterization: proportional</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fit:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Convergence:    converged</span></span>
+<span><span class="co">#&gt;   Observations:   2494</span></span>
+<span><span class="co">#&gt;   Parameters:     24</span></span>
+<span><span class="co">#&gt;   Log likelihood: -3555.535</span></span>
+<span><span class="co">#&gt;   Deviance:       7111.071</span></span>
+<span><span class="co">#&gt;   AIC:            7159.071</span></span>
+<span><span class="co">#&gt;   BIC:            7298.79</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Treatment effects:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;          estimate  std.error</span></span>
+<span><span class="co">#&gt;   arm_2 0.2493296 0.04117794</span></span>
+<span><span class="co">#&gt;   arm_3 0.3749138 0.04023259</span></span></code></pre></div>
 <p>The fitted model object has parameter estimates, standard errors,
 model constants, the convergence status, raw <a href="https://github.com/kaskr/RTMB" class="external-link"><code>RTMB</code></a> objects, and
 other information.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "data"            "constants"       "options"         "objective"      </span></span>
 <span><span class="co">#&gt;  [5] "model"           "optimization"    "report"          "initial"        </span></span>
 <span><span class="co">#&gt;  [9] "final"           "estimates"       "standard_errors" "metrics"        </span></span>
 <span><span class="co">#&gt; [13] "spline"</span></span></code></pre></div>
 <p>All estimates:<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;See also &lt;code&gt;fit$standard_errors&lt;/code&gt;.&lt;/p&gt;"><sup>2</sup></a></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">estimates</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
 <span><span class="co">#&gt;  $ alpha : Named num [1:5] 0.0269 0.763 0.9555 1.4059 1.6247</span></span>
@@ -161,7 +183,7 @@ other information.</p>
 <p>Just the estimates of actual parameters, omitting functions of other
 parameters:<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Can be supplied to the &lt;code&gt;initial&lt;/code&gt; argument of
 &lt;code&gt;&lt;a href="../reference/pmrm_model_decline_proportional.html"&gt;pmrm_model_decline_proportional()&lt;/a&gt;&lt;/code&gt;.&lt;/p&gt;'><sup>3</sup></a></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">final</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
 <span><span class="co">#&gt;  $ alpha: Named num [1:5] 0.0269 0.763 0.9555 1.4059 1.6247</span></span>
@@ -181,12 +203,12 @@ intuition and high-level understanding.</p>
 <p>First, check the convergence code. A 0 indicates convergence, and a 1
 indicates that the model diverged or a local minimum was not otherwise
 reached (e.g. in the case of a saddle point).</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span><span class="op">$</span><span class="va">optimization</span><span class="op">$</span><span class="va">convergence</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <p>Next, you may wish to check that the parameter estimates and standard
 errors make sense.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">estimates</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
 <span><span class="co">#&gt;  $ alpha : Named num [1:5] 0.0269 0.763 0.9555 1.4059 1.6247</span></span>
@@ -199,7 +221,7 @@ errors make sense.</p>
 <span><span class="co">#&gt;  $ sigma : num [1:5] 1.037 1.014 0.998 0.961 1.041</span></span>
 <span><span class="co">#&gt;  $ Lambda: num [1:5, 1:5] 1 -0.0428 -0.082 0.0436 -0.0712 ...</span></span>
 <span><span class="co">#&gt;  $ Sigma : num [1:5, 1:5] 1.0756 -0.045 -0.0849 0.0434 -0.0768 ...</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="va">standard_errors</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
 <span><span class="co">#&gt;  $ alpha : Named num [1:5] 0.0455 0.0637 0.0609 0.063 0.0636</span></span>
@@ -214,10 +236,10 @@ errors make sense.</p>
 <span><span class="co">#&gt;  $ Sigma : num [1:5, 1:5] 0.0681 0.0472 0.0466 0.0447 0.0486 ...</span></span></code></pre></div>
 <p>Also, please check for odd behavior in the fitted spline
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="prefix">|</mo><mi>ξ</mi><mo>,</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(x | \xi, \alpha)</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">knots</span> <span class="op">&lt;-</span> <span class="va">fit</span><span class="op">$</span><span class="va">constants</span><span class="op">$</span><span class="va">spline_knots</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html" class="external-link">curve</a></span><span class="op">(</span><span class="va">fit</span><span class="op">$</span><span class="fu">spline</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">knots</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">knots</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="usage_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="usage_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="672"></p>
 <p>In tough cases, the spline may flatten out at the knot boundaries or
 twist in strange directions. If you notice a strange fitted spline in a
 divergent model, you may wish to experiment with different knot
@@ -225,7 +247,7 @@ placement or hand-pick initial values for the vertical knot distances
 <code>alpha</code>. The latter can sometimes help stabilize
 <code>theta</code> (especially for <code>pmrm_model_slowing()</code>) by
 beginning with an appropriately strict monotone spline. Example:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial</span> <span class="op">&lt;-</span> <span class="va">fit</span><span class="op">$</span><span class="va">initial</span></span>
 <span><span class="va">initial</span><span class="op">$</span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">1.5</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
@@ -242,7 +264,7 @@ beginning with an appropriately strict monotone spline. Example:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, you can even tweak one or more parameters and then
 resume the original optimization.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial</span> <span class="op">&lt;-</span> <span class="va">fit</span><span class="op">$</span><span class="va">final</span> <span class="co"># true parameters from the last fit</span></span>
 <span><span class="va">initial</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># reset a scalar parameter that may have diverged</span></span>
 <span></span>
@@ -262,7 +284,7 @@ resume the original optimization.</p>
 Strong pairwise correlations involving the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 parameter may indicate that your spline has too many knots.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tmbstan</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/posterior/" class="external-link">posterior</a></span><span class="op">)</span></span>
@@ -294,7 +316,7 @@ parameter may indicate that your spline has too many knots.</p>
 errors, and confidence intervals of model parameters and standard
 downstream functions of parameters. For example, here are the active-arm
 post-baseline treatment effect parameters:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pmrm_estimates.html">pmrm_estimates</a></span><span class="op">(</span><span class="va">fit</span>, parameter <span class="op">=</span> <span class="st">"theta"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
 <span><span class="co">#&gt;   parameter arm   estimate standard_error lower upper</span></span>
@@ -303,7 +325,7 @@ post-baseline treatment effect parameters:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> theta     arm_3    0.375         0.040<span style="text-decoration: underline;">2</span> 0.296 0.454</span></span></code></pre></div>
 <p>And the same for the visit-specific standard deviations of the
 residuals:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pmrm_estimates.html">pmrm_estimates</a></span><span class="op">(</span><span class="va">fit</span>, parameter <span class="op">=</span> <span class="st">"sigma"</span>, confidence <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 6</span></span></span>
 <span><span class="co">#&gt;   parameter visit   estimate standard_error lower upper</span></span>
@@ -315,7 +337,7 @@ residuals:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> sigma     visit_5    1.04          0.033<span style="text-decoration: underline;">1</span> 0.987  1.10</span></span></code></pre></div>
 <p>The <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method produces high-level metrics for
 model comparison.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">#&gt;   model   parameterization n_observations n_parameters log_likelihood deviance</span></span>
@@ -330,7 +352,7 @@ model comparison.</p>
 each study arm and visit. The continuous time at each visit is given by
 the <code>marginals</code> argument to
 <code><a href="../reference/pmrm_model_decline_proportional.html">pmrm_model_decline_proportional()</a></code>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pmrm_marginals.html">pmrm_marginals</a></span><span class="op">(</span><span class="va">fit</span>, type <span class="op">=</span> <span class="st">"outcome"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 7</span></span></span>
 <span><span class="co">#&gt;    arm   visit    time estimate standard_error   lower upper</span></span>
@@ -352,7 +374,7 @@ the <code>marginals</code> argument to
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> arm_3 visit_5     4   1.03           0.056<span style="text-decoration: underline;">9</span>  0.914  1.14</span></span></code></pre></div>
 <p>Select <code>type = "change"</code> for estimates of change from
 baseline.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pmrm_marginals.html">pmrm_marginals</a></span><span class="op">(</span><span class="va">fit</span>, type <span class="op">=</span> <span class="st">"change"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 7</span></span></span>
 <span><span class="co">#&gt;    arm   visit    time estimate standard_error  lower  upper</span></span>
@@ -375,7 +397,7 @@ baseline.</p>
 <p>Select <code>type = "effect"</code> for estimates of the treatment
 effect (change from baseline of each active arm minus that of the
 control arm).</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pmrm_marginals.html">pmrm_marginals</a></span><span class="op">(</span><span class="va">fit</span>, type <span class="op">=</span> <span class="st">"effect"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 7</span></span></span>
 <span><span class="co">#&gt;    arm   visit    time estimate standard_error  lower  upper</span></span>
@@ -404,7 +426,7 @@ It returns the expected values, standard errors, and confidence
 intervals for the outcomes given new data. All the important columns
 from the original data need to be part of the new data, except that the
 outcome column can be entirely absent.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">simulation</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
 <span><span class="co">#&gt;   arm   visit    time estimate standard_error  lower  upper</span></span>
@@ -429,15 +451,15 @@ line segments and boxes around them.</li>
 <li>Model-based predictions and confidence bands, as continuous lines
 and shaded regions.</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">fit</span>,</span>
 <span>  show_predictions <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Defaults to FALSE because predictions take extra time.</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="usage_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="usage_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="672"></p>
 <p>You can customize the plot: for example, to compare the fitted
 disease progression trajectory across treatment arms.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">fit</span>,</span>
 <span>  confidence <span class="op">=</span> <span class="fl">0.9</span>,</span>
@@ -446,7 +468,7 @@ disease progression trajectory across treatment arms.</p>
 <span>  facet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="usage_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="usage_files/figure-html/unnamed-chunk-25-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

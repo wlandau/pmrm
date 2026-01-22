@@ -72,7 +72,31 @@ system.time(
   )
 )
 #>    user  system elapsed 
-#>   0.436   0.008   0.446
+#>   0.434   0.010   0.445
+```
+
+``` r
+print(fit)
+#> Model:
+#> 
+#>   PMRM type:        decline
+#>   Parameterization: proportional
+#> 
+#> Fit:
+#> 
+#>   Convergence:    converged
+#>   Observations:   2494
+#>   Parameters:     24
+#>   Log likelihood: -3555.535
+#>   Deviance:       7111.071
+#>   AIC:            7159.071
+#>   BIC:            7298.79
+#> 
+#> Treatment effects:
+#> 
+#>          estimate  std.error
+#>   arm_2 0.2493296 0.04117794
+#>   arm_3 0.3749138 0.04023259
 ```
 
 The fitted model object has parameter estimates, standard errors, model
@@ -175,7 +199,7 @@ knots <- fit$constants$spline_knots
 curve(fit$spline(x), min(knots), max(knots))
 ```
 
-![](usage_files/figure-html/unnamed-chunk-12-1.png)
+![](usage_files/figure-html/unnamed-chunk-13-1.png)
 
 In tough cases, the spline may flatten out at the knot boundaries or
 twist in strange directions. If you notice a strange fitted spline in a
@@ -418,7 +442,7 @@ plot(
 )
 ```
 
-![](usage_files/figure-html/unnamed-chunk-23-1.png)
+![](usage_files/figure-html/unnamed-chunk-24-1.png)
 
 You can customize the plot: for example, to compare the fitted disease
 progression trajectory across treatment arms.
@@ -434,7 +458,7 @@ plot(
 )
 ```
 
-![](usage_files/figure-html/unnamed-chunk-24-1.png)
+![](usage_files/figure-html/unnamed-chunk-25-1.png)
 
 ------------------------------------------------------------------------
 

@@ -91,14 +91,11 @@ The plot shows the following elements:
 
 ## See also
 
-Other estimates and predictions:
+Other estimates:
 [`VarCorr.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/VarCorr.pmrm_fit.md),
 [`coef.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/coef.pmrm_fit.md),
-[`fitted.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/fitted.pmrm_fit.md),
-[`pmrm_estimates()`](https://wlandau.github.io/pmrm/reference/pmrm_estimates.md),
 [`pmrm_marginals()`](https://wlandau.github.io/pmrm/reference/pmrm_marginals.md),
-[`predict.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/predict.pmrm_fit.md),
-[`residuals.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/residuals.pmrm_fit.md),
+[`tidy.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/tidy.pmrm_fit.md),
 [`vcov.pmrm_fit()`](https://wlandau.github.io/pmrm/reference/vcov.pmrm_fit.md)
 
 ## Examples

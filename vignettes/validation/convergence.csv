@@ -1,0 +1,9 @@
+scenario,convergence
+exponential_decline_nonproportional,1
+exponential_decline_proportional,1
+exponential_slowing_nonproportional,1
+exponential_slowing_proportional,1
+linear_decline_nonproportional,1
+linear_decline_proportional,1
+linear_slowing_nonproportional,1
+linear_slowing_proportional,1

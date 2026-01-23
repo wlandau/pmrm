@@ -1,0 +1,69 @@
+---
+title: "Validation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Validation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7L,
+  fig.height = 5L
+)
+```
+
+We run a simulation study to verify the models in `pmrm` are implemented correctly.
+For each simulation scenario (model type and disease progression trajectory), we:
+
+1. Simulate 1000 datasets from the model using independent non-`RTMB` R code.
+1. Fit the model to each simulated dataset using the `RTMB`-powered implementation.
+
+Around half of the 50% confidence intervals from (2) should cover the true data-generating parameter values in (1).
+Likewise, around 95% of the 95% confidence intervals from (2) should cover the truth.
+In addition, we expect all models to converge.
+
+# Implementation
+
+```{r, message = FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(readr)
+library(scales)
+```
+
+This simulation study is a [`targets`](htttps://docs.ropensci.org/targets) pipeline in the `vignettes/validation/` directory of the source code of `pmrm`.
+To run the pipeline, change to that working directory and call `targets::tar_make()`.
+Due to the computational cost, we only run this pipeline once per release.
+
+# Last run
+
+```{r, include = FALSE}
+version <- read_csv(file.path("validation", "version.csv"), col_types = cols())
+```
+
+We last ran the simulation pipeline with `pmrm` version `r version$version` with GitHub commit hash [`r packageDescription("pmrm")$GithubSHA1`](`r file.path("https://github.com/openpharma/pmrm/commit", version$commit)`).
+
+# Convergence
+
+The following table shows the percentage of fitted models that converged for each scenario. 
+
+```{r, message = FALSE}
+read_csv(file.path("validation", "convergence.csv")) |>
+  mutate(convergence = label_percent()(convergence)) |>
+  kable()
+```
+
+# Parameter coverage
+
+The following plot shows the percentage of confidence intervals that covered the true parameter values.
+Coverage is shown separately for each parameter in each scenario.
+For reference, the expected coverage rate is shown as a horizontal solid in each facet.
+
+```{r}
+include_graphics(file.path("validation", "coverage.png"))
+```

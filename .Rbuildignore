@@ -12,5 +12,5 @@
 ^docs$
 ^README\.html$
 ^LICENSE\.md$
-^_targets$
+_targets
 

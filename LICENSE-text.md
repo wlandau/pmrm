@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2026
-    COPYRIGHT HOLDER: Eli Lill and Company
+    COPYRIGHT HOLDER: Eli Lilly and Company

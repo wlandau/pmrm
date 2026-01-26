@@ -17,16 +17,14 @@
 Source:
 [`inst/CITATION`](https://github.com/openpharma/pmrm/blob/main/inst/CITATION)
 
-Landau WM, Raket LL, Kristensen K (2026). “Progression models for
-repeated measures: Estimating novel treatment effects in progressive
-diseases.” R package version 0.0.1.9000,
-<https://openpharma.github.io/pmrm/>.
+Landau WM, Raket LL, Kristensen K (2026). “Progression Models for
+Repeated Measures.” R package, <https://openpharma.github.io/pmrm/>.
 
     @Misc{,
       author = {William Michael Landau and Lars Lau Raket and Kasper Kristensen},
-      title = {Progression models for repeated measures: Estimating novel treatment effects in progressive diseases},
+      title = {Progression Models for Repeated Measures},
       year = {2026},
-      note = {R package version  0.0.1.9000},
+      note = {R package},
       url = {https://openpharma.github.io/pmrm/},
     }
 

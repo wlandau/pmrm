@@ -15,16 +15,19 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/openpharma/pmrm/blob/0.0.2/inst/CITATION)
+[`inst/CITATION`](https://github.com/openpharma/pmrm/blob/main/inst/CITATION)
 
 Landau WM, Raket LL, Kristensen K (2026). “Progression Models for
-Repeated Measures.” R package, <https://openpharma.github.io/pmrm/>.
+Repeated Measures.”
+[doi:10.32614/CRAN.package.pmrm](https://doi.org/10.32614/CRAN.package.pmrm),
+R package, <https://openpharma.github.io/pmrm/>.
 
     @Misc{,
       author = {William Michael Landau and Lars Lau Raket and Kasper Kristensen},
       title = {Progression Models for Repeated Measures},
       year = {2026},
       note = {R package},
+      doi = {10.32614/CRAN.package.pmrm},
       url = {https://openpharma.github.io/pmrm/},
     }
 

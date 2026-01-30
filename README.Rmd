@@ -26,7 +26,7 @@ The pmrm package implements the frequentist PMRM framework of @raket2022 using a
 
 # Documentation
 
-Please see <https://openpharma.github.io/pmrm/> for model definitions, a usage tutorial, and a function reference. 
+Please see <https://openpharma.github.io/pmrm/> for model definitions, a usage tutorial, and a function reference.
 
 # Installation
 
